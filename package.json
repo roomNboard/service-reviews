@@ -17,12 +17,14 @@
     "faker": "^4.1.0",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
+    "pg": "^6.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "util": "^0.11.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -56,5 +58,6 @@
   "bugs": {
     "url": "https://github.com/roomNboard/service-reviews/issues"
   },
-  "homepage": "https://github.com/roomNboard/service-reviews#readme"
+  "homepage": "https://github.com/roomNboard/service-reviews#readme",
+  "keywords": []
 }
