@@ -28,7 +28,7 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    this.props.selectARoom(window.location.pathname.replace('/',''), this.props.numberReviewsPerPage);
+    this.props.selectARoom(window.location.pathname.replace('/', ''), this.props.numberReviewsPerPage);
   }
 
   render() {
