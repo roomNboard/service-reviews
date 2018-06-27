@@ -26,3 +26,6 @@ dist/
 public/
 database/config.js
 roadmap/
+
+#CSV files
+SDC/csv
