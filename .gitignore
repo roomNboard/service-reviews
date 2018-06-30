@@ -27,5 +27,11 @@ public/
 database/config.js
 roadmap/
 
-#CSV files
-SDC/csv
+# postgres config
+./SDC/postgres/psqlConfig.js
+
+# mongo config
+./SDC/mongod/mongoConfig.js
+
+# redis
+./SDC/CRUD/redisConfig.js
