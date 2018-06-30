@@ -6,6 +6,7 @@ const propertyGenerator = (writer) => {
   const write = () => {
     let ok = true;
     do {
+      let j = i -1;
       if (i % 100000 === 0) {
         console.log(`${i} has been added`);
       }
@@ -14,12 +15,12 @@ const propertyGenerator = (writer) => {
         writer.write('id,property_name\n');
       } else if (i === 10000001) {
         // last time!
-        writer.write(`${i},${faker.lorem.sentence(2, false, 2)}\n`);
+        writer.write(`${j},${faker.lorem.sentence(2, false, 2)}\n`);
         writer.end();
       } else {
         // see if we should continue, or wait
         // don't pass the callback, because we're not done yet.
-        ok = writer.write(`${i},${faker.lorem.sentence(2, false, 2)}\n`);
+        ok = writer.write(`${j},${faker.lorem.sentence(2, false, 2)}\n`);
       }
       i += 1;
     } while (i <= 10000001 && ok);

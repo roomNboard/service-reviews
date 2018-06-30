@@ -32,7 +32,7 @@ const reviewsGenerator = (writer) => {
 
       if (i === 1) {
         writer.write('id,user_id,property_id,text,date,accuracy,communication,cleanliness,location,check_in,value\n');
-      } else if (i === 10000001) {
+      } else if (i === 100000001) {
         // last time!
 
         writer.write(`${j},${faker.random.number({ min: 1, max: 10000000 })},${propertyId},${faker.lorem.sentences(4)},${dates.slice(4, 15)},${accuracy},${communication},${cleanliness},${location},${checkIn},${value}\n`);
@@ -46,8 +46,8 @@ const reviewsGenerator = (writer) => {
         ok = writer.write(`${j},${faker.random.number({ min: 1, max: 10000000 })},${propertyId},${faker.lorem.sentences(4)},${dates.slice(4, 15)},${accuracy},${communication},${cleanliness},${location},${checkIn},${value}\n`);
       }
       i += 1;
-    } while (i <= 10000001 && ok);
-    if (i <= 10000001) {
+    } while (i <= 100000001 && ok);
+    if (i <= 100000001) {
       // had to stop early!
       // write some more once it drains
       writer.once('drain', write);
@@ -57,9 +57,11 @@ const reviewsGenerator = (writer) => {
 };
 
 reviewsGenerator(fs.createWriteStream('/media/brian/Iomega/csv/randomReviews.csv'));
-// real	2m46.961s
-// user	2m30.159s
-// sys	0m9.270s
+// For 100 million records:
+// real	33m19.613s
+// user	28m12.818s
+// sys	2m10.799s
+
 
 // const reviewStorage = {};
 // const fillReviewStorage = (
