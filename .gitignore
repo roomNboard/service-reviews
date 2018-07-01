@@ -35,3 +35,7 @@ roadmap/
 
 # redis
 ./SDC/CRUD/redisConfig.js
+
+#newRelic
+./SDC/CRUD/newrelic_agent.log
+./newrelic.js
