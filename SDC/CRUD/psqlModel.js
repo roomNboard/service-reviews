@@ -1,7 +1,5 @@
 const db = require('../postgres/psqlConfig.js');
 
-// db.connect();
-
 db.connect();
 
 module.exports = {

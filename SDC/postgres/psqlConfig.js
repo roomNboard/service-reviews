@@ -7,6 +7,5 @@ const db = new Pool({
   password: 'ABCdef123!',
   port: 5432,
 });
-// const db = new pg.Client('postgres://brian:ABCdef123!@localhost:5432/reviews');
 
 module.exports = db;
