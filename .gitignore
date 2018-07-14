@@ -1,8 +1,6 @@
 ## MAC files ##
 .DS_Store
 
-newrelic.js
-
 ## NPM ##
 npm
 npm-debug.log
@@ -32,12 +30,12 @@ roadmap/
 # postgres config
 ./SDC/postgres/psqlConfig.js
 
-# mongo config
-./SDC/mongod/mongoConfig.js
-
 # redis
 ./SDC/CRUD/redisConfig.js
 
 #newRelic
 ./SDC/CRUD/newrelic_agent.log
 ./newrelic.js
+
+#newRelic
+newrelic.js

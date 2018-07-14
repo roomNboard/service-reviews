@@ -1,15 +1,14 @@
-// require('newrelic');
+require('newrelic');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// const cluster = require('cluster');
-// const numCPUs = require('os').cpus();
 const pdb = require('./psqlModel.js');
 const client = require('./redisConfig.js');
+const createStorage = require('./helperFunctionStorage.js');
 
 const app = express();
 const PORT = 3000;
-// app.use(express.static(path.join(__dirname, '../../public/')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,7 +21,7 @@ const cache = (req, res, next) => {
     }
 
     if (result !== null) {
-      res.status(200).send(result);
+      res.status(200).send(JSON.parse(result));
     } else {
       next();
     }
@@ -37,8 +36,9 @@ app.get('/getReviews/:id', cache, (req, res) => {
       return res.status(404).send(err);
     }
 
-    client.setex(param, 3000, JSON.stringify(result.rows));
-    res.status(200).send(result.rows);
+    client.setex(param, 3000, JSON.stringify(createStorage(result, param)));
+
+    return res.status(200).send(createStorage(result, param));
   });
 });
 
@@ -49,9 +49,10 @@ app.post('/postReview', (req, res) => {
       return res.status(500).send(err);
     }
 
-    res.status(201).send();
+    return res.status(201).send();
   });
 });
+
 
 app.delete('/deleteReview', (req, res) => {
   const param = req.query;
@@ -61,7 +62,7 @@ app.delete('/deleteReview', (req, res) => {
       return res.status(404).send(err);
     }
 
-    res.status(204).send();
+    return res.status(204).send();
   });
 });
 
@@ -69,8 +70,10 @@ app.listen(PORT, () => {
   console.log('Listening on Port: ', PORT);
 });
 
-
 // Cluster Code
+
+// const cluster = require('cluster');
+// const numCPUs = require('os').cpus();
 
 // if (cluster.isMaster) {
 //   for (let x = 0; x < numCPUs.length; x++) {

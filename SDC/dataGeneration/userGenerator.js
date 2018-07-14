@@ -6,28 +6,19 @@ const userGenerator = (writer) => {
   const write = () => {
     let ok = true;
     do {
-      let j = i - 1;
-
-      if (i % 100000 === 0) {
-        console.log(`${i} has been added`);
-      }
+      const j = i - 1;
 
       if (i === 1) {
         writer.write('id,first_name,last_name,avatar\n');
-      } else if (i === 10000001) {
-        // last time!
-        writer.write(`${j},${faker.name.firstName()},${faker.name.lastName()},${faker.image.imageUrl(400, 400, 'people')}\n`);
+      } else if (i === 5000001) {
+        writer.write(`${j},${faker.name.findName()},${faker.image.imageUrl(400, 400, 'people')}\n`);
         writer.end();
       } else {
-        // see if we should continue, or wait
-        // don't pass the callback, because we're not done yet.
-        ok = writer.write(`${j},${faker.name.firstName()},${faker.name.lastName()},${faker.image.imageUrl(400, 400, 'people')}\n`);
+        ok = writer.write(`${j},${faker.name.firstName()},${faker.image.imageUrl(400, 400, 'people')}\n`);
       }
       i += 1;
-    } while (i <= 10000001 && ok);
-    if (i <= 10000001) {
-      // had to stop early!
-      // write some more once it drains
+    } while (i <= 5000001 && ok);
+    if (i <= 5000001) {
       writer.once('drain', write);
     }
   };
@@ -35,7 +26,3 @@ const userGenerator = (writer) => {
 };
 
 userGenerator(fs.createWriteStream('/media/brian/Iomega/csv/randomUsers.csv'));
-// real	0m25.768s
-// user	0m21.284s
-// sys	0m2.808s
-

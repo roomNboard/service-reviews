@@ -1,11 +1,14 @@
 const db = require('../postgres/psqlConfig.js');
 
-db.connect();
+db.connect().then(() => {
+  console.log('database connected');
+}).catch((error) => {
+  console.log('error in database', error);
+});
 
 module.exports = {
   getListingReviews: (id, callback) => {
-    // const param = params;
-    const q = `SELECT p.property_name AS propertyName, u.first_name AS firstName, u.last_name AS lastName, u.avatar, r.text, r.date, r.accuracy, r.communication, r.cleanliness, r.location, r.check_in AS checkIn, r.value
+    const q = `SELECT p.id, p.property_name AS propertyName, u.username, u.avatar, r.text, r.date, r.accuracy, r.communication, r.cleanliness, r.location, r.check_in AS checkIn, r.value
     FROM reviews AS r
     INNER JOIN property AS p
     ON r.property_id = p.id
@@ -39,7 +42,6 @@ module.exports = {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
 
     db.query(q, parameters, (err, result) => {
-
       if (err) {
         callback(err, null);
       } else {
@@ -105,26 +107,3 @@ module.exports = {
     });
   },
 };
-
-// updateReview: (params, callback) => {
-//   const param = [
-//     params.id,
-//     params.text,
-//     params.accuracy,
-//     params.communication,
-//     params.cleanliness,
-//     params.location,
-//     params.checkIn,
-//     params.value
-//   ];
-
-//   const q = ``;
-
-//   db.query(q, (err, result) => {
-//     if (err) {
-//       callback(err, null);
-//     } else {
-//       callback(null, result);
-//     }
-//   });
-// }

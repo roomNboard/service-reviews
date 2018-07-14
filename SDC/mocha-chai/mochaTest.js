@@ -10,7 +10,7 @@ let param;
 
 describe('GET request', () => {
   options.method = 'GET';
-  options.url = 'http://localhost/3000/getReviews'
+  options.url = 'http://localhost/3000/getReviews';
 
   it ('should retrieve data from the appropiate id', (done) => {
     table = 'reviews';
